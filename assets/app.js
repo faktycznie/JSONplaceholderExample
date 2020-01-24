@@ -1,10 +1,8 @@
-'use strict';
-
 class SomeClass {
 
 	constructor() {
 		this.posts = document.querySelector('.posts');
-		this.api = 'http://jsonplaceholder.typicode.com';
+		this.api = 'https://jsonplaceholder.typicode.com';
 		this.start = 0;
 		this.limit = 10;
 		this.empty = {
@@ -104,7 +102,7 @@ class SomeClass {
 		const list = this.posts.querySelector('.posts__list');
 		list.innerHTML = ''; // clear the list :)
 
-		if( undefined != typeof data && data.length ) {
+		if( 'undefined' !== typeof data && data.length ) {
 			data.forEach(el => {
 				const li = document.createElement('li');
 				li.classList.add('post');
@@ -143,6 +141,10 @@ class SomeClass {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', function(event) {
+if( document.readyState !== 'loading' ) {
 	new SomeClass();
-});
+} else {
+	document.addEventListener('DOMContentLoaded', event => {
+		new SomeClass();
+	});
+}
