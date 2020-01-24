@@ -3,6 +3,8 @@ class SomeClass {
 	constructor() {
 		this.posts = document.querySelector('.posts');
 		this.api = 'https://jsonplaceholder.typicode.com';
+		this.data = [];
+		this.allPosts = [];
 		this.start = 0;
 		this.limit = 10;
 		this.empty = {
@@ -60,17 +62,28 @@ class SomeClass {
 			if( '' === event.target.value ) {
 				this.getPosts();
 			} else {
-				this.getPosts(null, null, false); //get all posts
-				let filtered = this.data.filter(el => {
-					return el.title.includes(event.target.value);
-				});
-				if( 0 === filtered.length ) {
-					filtered = [this.empty];
+				if( 'undefined' === typeof this.allPosts || 0 === this.allPosts.length ) {
+					this.getPosts(null, null, false) //get all posts only once
+					.then(response => {
+						this.allPosts = response;
+						return this.filterData(event.target.value);
+					});
+				} else {
+					return this.filterData(event.target.value);
 				}
-				document.querySelector('.pagination').style.display = 'none'; //hide pagination
-				this.buildPosts(filtered);
 			}
 		});
+	}
+
+	filterData( name ) {
+		let filtered = this.allPosts.filter(el => {
+			return el.title.includes(name);
+		});
+		if( 0 === filtered.length ) {
+			filtered = [this.empty];
+		}
+		document.querySelector('.pagination').style.display = 'none'; //hide pagination
+		this.buildPosts(filtered);
 	}
 
 	async getPosts( start = 0, limit = 10, build = true ) {
