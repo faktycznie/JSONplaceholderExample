@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Just an example</title>
+		<meta name="description" content="">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="assets/normalize.min.css">
+		<link rel="stylesheet" href="assets/app.css">
+		<script src="assets/app.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="container__inner">
+				<nav class="menu">
+					<ul class="menu__list">
+						<li class="menu__item"><a class="menu__link menu__link--active" href="index.html">My awesome posts ;-)</a></li>
+						<li class="menu__item"><a class="menu__link" href="https://github.com/faktycznie" target="blank">Github</a></li>
+					</ul>
+				</nav>
+				<div class="content">
+					<div class="content__header">
+						<div class="search">
+							<form><input type="text" class="search__input" placeholder="Search post"></form>
+						</div>
+						<div class="pagination" style="display: none;">
+							<a href="#" class="pagination__prev">Prev</a>
+							<a href="#" class="pagination__next">Next</a>
+						</div>
+					</div>
+					<div class="posts loader">
+						<ul class="posts__list"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
